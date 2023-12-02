@@ -1,61 +1,51 @@
 import Sections from "../models/SectionModel.js";
-import mongoose from "mongoose";
+
 // get all
 const getAllSections = async (req,res) =>{
   let allSection = await Sections.find({});
   res.json(allSection);
 }
-//  get one workout
-const getOneSection = async () => {
-  const {id} = req.params;
 
-  if(mongoose.Types.ObjectId.isValid(id)){
-    return res.status(404).json({error: 'No section'});
-  }
-
-  const section = await Sections.find(id);
+//  get one section
+const getOneSection = async (req,res) => {
+  const {order} = req.params;
+  console.log(order);
+  const section = await Sections.find({order:order});
   if (!section){
-    return res.status(404).json({error: 'No section'});
+    return res.status(404).json({error: 'No section found'});
   }
   res.status(200).json(section);
 }
+
 // create new section
 const  createSection = async (req,res) => {
   const {name} = req.body;
   const order = (await Sections.find()).length+1;
   // add section
   try{
-    const section = await Sections.create({order,name})
-    res.status(200).json(section)
+    const section = await Sections.create({order,name});
+    res.status(200).json(section);
   }catch(error){
     res.status(400).json({error: error.message});
-    console.log('problem with adding section')
+    console.log('problem with adding section');
   }
 }
+
 // delete section
 const deleteSection = async (req,res) => {
-  const {id} = req.params
-
-  if(!mongoose.Types.ObjectId.isValid(id)){
-    return res.status(404).json({error: 'No valid id'});
-  }
-
-  const section = await Sections.findOneAndDelete({_id: id});
-
+  const {order} = req.params
+  const section = await Sections.findOneAndDelete({order:order});
   if (!section){
-    return res.status(404).json({error: 'delete not happen'});
+    return res.status(404).json({error: 'delete did not  happen'});
   }
   res.status(200).json(section);
 }
+
 // update section
 const updateSection = async (req,res) => {
-  const {id} = req.params
+  const {order} = req.params
 
-  if(!mongoose.Types.ObjectId.isValid(id)){
-    return res.status(404).json({error: 'no valid id'});
-  }
-
-  const section = await Sections.findOneAndUpdate({_id: id}, {
+  const section = await Sections.findOneAndUpdate({order:order}, {
     ...req.body
   });
 

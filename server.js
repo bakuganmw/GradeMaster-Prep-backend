@@ -1,14 +1,19 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 const port = 4000;
 const mongoURL = 'mongodb+srv://bakuganmw:masterGrade@mastergrade.qw7o9k0.mongodb.net/?retryWrites=true&w=majority'
 const app = express();
 
 import routerSection from './routes/sections.js';
+import routerChapter from './routes/chapters.js';
 
 // middleware
 // it gives access to body
 app.use(express.json());
+
+app.use(cors())
+
 
 app.use((req,res,next) => {
 	console.log(req.path,req.method);
@@ -18,6 +23,7 @@ app.use((req,res,next) => {
 // routes
 app.use('/sections',routerSection);
 
+app.use('/chapters',routerChapter);
 // connect to DB
 mongoose.connect(mongoURL)
 .then(() => {

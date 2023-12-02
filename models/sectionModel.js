@@ -9,11 +9,13 @@ const sectionSchema = new Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   }
 },{timestamps:true})
 
-const Sections = mongoose.model('Section', sectionSchema)
+// name plural and lowercased automatically by mongoDB
+const Sections = mongoose.model('sections', sectionSchema)
 
 export default Sections
 

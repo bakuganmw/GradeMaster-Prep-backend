@@ -4,12 +4,12 @@ const routerSection = express.Router();
 
 routerSection.get('/',getAllSections)
 
-routerSection.get('/:id', getOneSection)
+routerSection.get('/:order', getOneSection)
 
 routerSection.post('/', createSection)
 
-routerSection.delete('/:id', deleteSection)
+routerSection.delete('/:order', deleteSection)
 
-routerSection.patch('/:id', updateSection)
+routerSection.patch('/:order', updateSection)
 
 export default routerSection
