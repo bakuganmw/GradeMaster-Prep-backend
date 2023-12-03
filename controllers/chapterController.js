@@ -1,5 +1,4 @@
 import Chapters from "../models/chapterModel.js";
-import mongoose from "mongoose";
 
 // get all
 const getAllChapters = async (req,res) =>{
@@ -46,9 +45,6 @@ const  createChapter = async (req,res) => {
   const deleteChapter = async (req,res) => {
     const {chapterName,sectionName} = req.params
   
-    // if(!mongoose.Types.ObjectId.isValid(id)){
-    //   return res.status(404).json({error: 'No valid id'});
-    // }
     console.log(chapterName)
     console.log(sectionName)
     const Chapter = await Chapters.findOneAndDelete({chapterName: chapterName,sectionName:sectionName});
