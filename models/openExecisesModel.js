@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -19,6 +19,6 @@ const openExeciseSchema = new Schema(
   }
 )
 
-const openExecises = mongoose.model("open execises", openExeciseSchema);
+const OpenExecises = mongoose.model("open execises", openExeciseSchema);
 
-export default openExecises;
+export default OpenExecises;

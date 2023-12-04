@@ -1,4 +1,4 @@
-import Sections from "../models/SectionModel.js";
+import Sections from "../models/sectionModel.js";
 
 // get all
 const getAllSections = async (req,res) =>{
