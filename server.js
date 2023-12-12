@@ -8,6 +8,7 @@ const app = express();
 import routerSection from './routes/sections.js';
 import routerChapter from './routes/chapters.js';
 import routerOpenExecises from './routes/openExecises.js';
+import routerUsers from './routes/users.js';
 
 // middleware
 // it gives access to body
@@ -27,6 +28,10 @@ app.use('/sections',routerSection);
 app.use('/chapters',routerChapter);
 
 app.use('/openExecises',routerOpenExecises);
+
+
+app.use('/',routerUsers);
+
 // connect to DB
 mongoose.connect(mongoURL)
 .then(() => {
