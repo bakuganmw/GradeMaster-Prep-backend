@@ -1,6 +1,9 @@
 import express from 'express';
 import { createChapter, deleteChapter, getAllChapters, getOneChapter, updateChapter, getSectionsChapters } from '../controllers/chapterController.js';
+import { requireAuth } from '../middlewares/requireAuth.js';
 const routerChapter = express.Router();
+
+routerChapter.use(requireAuth)
 
 routerChapter.get('/',getAllChapters)
 

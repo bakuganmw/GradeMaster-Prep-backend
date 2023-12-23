@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-const port = 4000;
-const mongoURL = 'mongodb+srv://bakuganmw:masterGrade@mastergrade.qw7o9k0.mongodb.net/?retryWrites=true&w=majority'
+import { port,mongoURL } from './settings.js';
+
 const app = express();
 
 import routerSection from './routes/sections.js';
