@@ -9,6 +9,7 @@ import routerSection from './routes/sections.js';
 import routerChapter from './routes/chapters.js';
 import routerOpenExecises from './routes/openExecises.js';
 import routerUsers from './routes/users.js';
+import routerClosedExecise from './routes/closedExecises.js';
 
 // middleware
 // it gives access to body
@@ -29,6 +30,7 @@ app.use('/chapters',routerChapter);
 
 app.use('/openExecises',routerOpenExecises);
 
+app.use('/closedExecises', routerClosedExecise)
 
 app.use('/',routerUsers);
 

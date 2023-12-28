@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import OpenExecises from "../models/openExecisesModel.js";
 
 // get all
