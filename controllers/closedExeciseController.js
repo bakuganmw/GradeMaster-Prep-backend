@@ -1,12 +1,30 @@
 import closedExecises from "../models/closedExeciseModel.js";
 
+const previousNumber = [];
+let flag = false;
 const getRandomClosedExecise = async (req,res) =>{
   let allClosedExecises = await closedExecises.find({});
-  let test = Math.random()*allClosedExecises.length
-  let randomNumber = Math.round(test) -1;
-  console.log(randomNumber);
-  console.log(test);
-  res.json(allClosedExecises[randomNumber])
+  // Generate a random unique index
+  let uniqueIndex;
+  do {
+    const test = Math.random() * allClosedExecises.length;
+    uniqueIndex = Math.floor(test);
+  } while (checkIfIndexExists(uniqueIndex));
+  
+  // Add the unique index to the array
+  if(flag ==false){
+    flag = true;
+  }
+  else{
+    if(previousNumber.length ==0){
+      previousNumber.push(uniqueIndex);
+    }
+    else{
+      previousNumber[0] = uniqueIndex
+    }
+    flag = false;
+  }
+  res.json(allClosedExecises[uniqueIndex])
 }
 
 const addClosedExecise = async(req,res) =>{
@@ -44,6 +62,11 @@ const updateClosedExecise = async (req,res) =>{
   }
   res.status(200).json(updatedExecise);
 }
+
+const checkIfIndexExists = (index) => {
+  return previousNumber.includes(index);
+};
+
 export {
   getRandomClosedExecise,
   addClosedExecise,
