@@ -25,20 +25,20 @@ const userSchema = new Schema({
 userSchema.statics.signup = async function(email,password,username){
 
   if(!email || !password){
-    throw Error('All fields must be filled');
+    throw Error('Wszystkie pola muszą być wypełnione');
   }
 
   if(!validator.isEmail(email)){
-    throw Error('Email not valid');
+    throw Error('Email nie jest poprawny');
   }
 
   if(!validator.isStrongPassword(password)){
-    throw Error('Password not strong enough');
+    throw Error('Hasło nie jest dość silne.(Musi mieć 1 znak duży, 1 specjalny i składać się z min 8 znaków)');
   }
   const exists = await this.findOne({email})
 
   if (exists){
-    throw Error("Email already in use")
+    throw Error("Email jest w użyciu")
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -51,19 +51,19 @@ userSchema.statics.signup = async function(email,password,username){
 userSchema.statics.login = async function(email,password){
 
   if(!email || !password){
-    throw Error('All fields must be filled');
+    throw Error('Wszystkie pola muszą być wypełnione');
   }
 
   const user = await this.findOne({email})
 
   if (!user){
-    throw Error("not signed up yet ")
+    throw Error("Nie zarejestrowany email")
   }
 
   const match = await bcrypt.compare(password, user.password)
 
   if(!match){
-    throw Error('Incorrect password')
+    throw Error('Nie właściwe hasło')
   }
 
   return user
