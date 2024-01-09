@@ -19,10 +19,10 @@ const getOneOpenExecise = async (req,res) => {
 
 // create new open execise
   const  createOpenExecise = async (req,res) => {
-    const {content,answers,chapter} = req.body;
+    const {content,answers,advice,chapter} = req.body;
     // add open execise
     try{
-      const openExecise = await OpenExecises.create({content,answers,chapter});
+      const openExecise = await OpenExecises.create({content,answers,advice,chapter});
       res.status(200).json(openExecise);
     }catch(error){
       res.status(400).json({error: error.message});

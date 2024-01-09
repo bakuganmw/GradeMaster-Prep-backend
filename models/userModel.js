@@ -24,7 +24,7 @@ const userSchema = new Schema({
 
 userSchema.statics.signup = async function(email,password,username){
 
-  if(!email || !password){
+  if(!email || !password || !username){
     throw Error('Wszystkie pola muszą być wypełnione');
   }
 
@@ -52,6 +52,10 @@ userSchema.statics.login = async function(email,password){
 
   if(!email || !password){
     throw Error('Wszystkie pola muszą być wypełnione');
+  }
+  
+  if(!validator.isEmail(email)){
+    throw Error('Email nie jest poprawny');
   }
 
   const user = await this.findOne({email})

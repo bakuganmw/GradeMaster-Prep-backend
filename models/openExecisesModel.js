@@ -12,6 +12,10 @@ const openExeciseSchema = new Schema(
     type:Array,
     required:true
   },
+  advice:{
+    type:Array,
+    required:true
+  },
   chapter:{
     type:String,
     required:true
