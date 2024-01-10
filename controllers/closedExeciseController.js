@@ -36,8 +36,7 @@ const addClosedExecise = async(req,res) =>{
     const closedExecise = await closedExecises.create({order,content,answers,correctAnswer,reason});
     res.status(200).json(closedExecise);
   }catch(error){
-    res.status(400).json({error: error.message});
-    console.log('problem with adding a closed execise');
+    res.status(400).json({error: 'Nie udało się dodać zadania zamkniętego'});
   }
 }
 
@@ -45,7 +44,7 @@ const deleteClosedExecise = async (req,res) =>{
   const {order} = req.params
   const execiseToDelete = await closedExecises.findOneAndDelete({order:order});
   if (!execiseToDelete){
-    return res.status(404).json({error: 'cannot find execise to delete'});
+    return res.status(404).json({error: 'Nie udało się usunąć zadania zamkniętego'});
   }
   res.status(200).json(section);
 }
@@ -58,7 +57,7 @@ const updateClosedExecise = async (req,res) =>{
   });
 
   if (!updatedExecise){
-    return res.status(404).json({error: 'No execise updated'});
+    return res.status(404).json({error: 'Nie udało się zaktualizować zadania zamkniętego'});
   }
   res.status(200).json(updatedExecise);
 }
