@@ -32,7 +32,20 @@ const signupUser = async (req,res) =>{
   }
   }
 
+const updateUser = async (req,res) => {
+  const {email} = req.params
+
+  const users = await Users.findOneAndUpdate({email:email}, {
+    ...req.body
+  });
+
+  if (!users){
+    return res.status(404).json({error: 'Nie udało się zaktualizować nazwy'});
+  }
+  res.status(200).json(users);
+}
 export{
   signupUser,
   loginUser,
+  updateUser,
 }
